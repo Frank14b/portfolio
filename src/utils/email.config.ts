@@ -1,12 +1,10 @@
-const options = {
-    host: "smtp.example.com",
-    port: 587,
-    tls: {
-        rejectUnauthorized: true,
-        minVersion: "TLSv1.2"
-    }
-}
+import { ENV_CONFIG } from "./";
 
-export const emailConfigs = {
-    options
-}
+const options = {
+  from: "",
+  ...ENV_CONFIG.SMTP,
+};
+
+export const EMAIL_CONFIGS = {
+  options,
+};
