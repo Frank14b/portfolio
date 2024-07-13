@@ -1,0 +1,42 @@
+FROM node:21-alpine
+
+WORKDIR /app
+
+COPY portfolio-view/package.json portfolio-view/package-lock.json ./
+RUN npm install
+
+# Copy source code
+COPY portfolio-view/. .
+
+#GET variables from .env
+ARG NEXT_PUBLIC_APP_ENV
+ARG NEXT_PUBLIC_LIVE_API
+ARG NEXT_PUBLIC_DEV_API
+ARG NEXT_PUBLIC_ENCRYPT_PASSWORD
+ARG APP_ENV
+ARG LIVE_API
+ARG DEV_API
+ARG ENCRYPT_PASSWORD
+ARG API_VERSION
+ARG NEXT_PUBLIC_API_PUBLIC_FILES_LINK
+
+# Set environment variabless
+ENV NEXT_PUBLIC_APP_ENV=$NEXT_PUBLIC_APP_ENV
+ENV NEXT_PUBLIC_LIVE_API=$NEXT_PUBLIC_LIVE_API
+ENV NEXT_PUBLIC_DEV_API=$NEXT_PUBLIC_DEV_API
+ENV NEXT_PUBLIC_ENCRYPT_PASSWORD=$NEXT_PUBLIC_ENCRYPT_PASSWORD
+# server actions variables
+ENV APP_ENV=$APP_ENV
+ENV LIVE_API=$LIVE_API
+ENV DEV_API=$DEV_API
+ENV API_VERSION=$API_VERSION
+# publics files host link
+ENV NEXT_PUBLIC_API_PUBLIC_FILES_LINK=$NEXT_PUBLIC_API_PUBLIC_FILES_LINK
+# 60 seconds before each resend otp
+ENV NEXT_PUBLIC_API_PUBLIC_RESEND_OTP_TIMER=15
+
+# Expose the port Next.js is running on (default is 3000)
+EXPOSE 4010
+
+# Start the application
+CMD ["npm", "run", "dev"]

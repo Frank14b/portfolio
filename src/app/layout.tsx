@@ -11,7 +11,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js + Tailwind Portfolio Page",
+  title: "Frank Donald Fontcha | Software Engineer",
   description:
     "Introducing Tailwind Portfolio Page, a versatile and stylish portfolio template built on the foundation of Tailwind CSS and Material Tailwind.",
 };
@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={roboto.className}>
         <Layout>
           {children}
-          <FixedPlugin />
+          {/* <FixedPlugin /> */}
         </Layout>
       </body>
     </html>

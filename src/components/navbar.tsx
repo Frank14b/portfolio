@@ -6,28 +6,32 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
+
 import {
   RectangleStackIcon,
   UserCircleIcon,
   CommandLineIcon,
-  Squares2X2Icon,
   XMarkIcon,
   Bars3Icon,
 } from "@heroicons/react/24/solid";
 
+import {
+  CommandLineIcon as CommandLineIconOutline,
+} from "@heroicons/react/24/outline";
+
 const NAV_MENU = [
   {
-    name: "Page",
+    name: "Home",
     icon: RectangleStackIcon,
   },
   {
-    name: "Account",
+    name: "Contacts",
     icon: UserCircleIcon,
   },
   {
-    name: "Docs",
+    name: "Blog",
     icon: CommandLineIcon,
-    href: "https://www.material-tailwind.com/docs/react/installation",
+    href: "#",
   },
 ];
 
@@ -45,7 +49,7 @@ function NavItem({ children, href }: NavItemProps) {
         target={href ? "_blank" : "_self"}
         variant="paragraph"
         color="gray"
-        className="flex items-center gap-2 font-medium text-gray-900"
+        className="flex items-center gap-2 font-medium text-gray-900 dark:text-gray-300"
       >
         {children}
       </Typography>
@@ -66,10 +70,10 @@ export function Navbar() {
   }, []);
 
   return (
-    <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50">
+    <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50 dark:bg-primaryBlack-600">
       <div className="container mx-auto flex items-center justify-between">
-        <Typography color="blue-gray" className="text-lg font-bold">
-          Material Tailwind
+        <Typography color="blue-gray" className="text-lg font-bold dark:text-white flex gap-2">
+        <CommandLineIconOutline className="h-5 w-5 mt-1"/> Frank Fontcha
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
@@ -80,16 +84,16 @@ export function Navbar() {
           ))}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="text">Sign In</Button>
-          <a href="https://www.material-tailwind.com/blocks" target="_blank">
-            <Button color="gray">blocks</Button>
+          <Button variant="text" className="dark:text-gray-200">Sign In</Button>
+          <a href="#">
+            <Button color="gray">Sign Up</Button>
           </a>
         </div>
         <IconButton
           variant="text"
           color="gray"
           onClick={handleOpen}
-          className="ml-auto inline-block lg:hidden"
+          className="ml-auto inline-block lg:hidden dark:bg-gray-600 py-0"
         >
           {open ? (
             <XMarkIcon strokeWidth={2} className="h-6 w-6" />
@@ -109,9 +113,9 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 mb-4 flex items-center gap-2">
-            <Button variant="text">Sign In</Button>
-            <a href="https://www.material-tailwind.com/blocks" target="_blank">
-              <Button color="gray">blocks</Button>
+            <Button variant="text" className="dark:text-gray-200">Sign In</Button>
+            <a href="#">
+              <Button color="gray">Sign Up</Button>
             </a>
           </div>
         </div>
