@@ -9,7 +9,7 @@ import {
   EyeIcon,
   DocumentTextIcon,
 } from "@heroicons/react/24/solid";
-import { SkillCard } from "@/components";
+import { SkillCard } from "@/components/common";
 
 const SKILLS = [
   {

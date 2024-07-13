@@ -1,11 +1,11 @@
 // components
-import { Navbar, Footer } from "@/components";
+import { Navbar, Footer } from "@/components/common";
 
 // sections
-import Hero from "./hero";
-import Skills from "./skills";
-import Resume from "./resume";
-import ContactForm from "./contact-form";
+import Hero from "../hero";
+import Skills from "../skills";
+import Resume from "../resume";
+import ContactForm from "../contact-form";
 
 export default function Portfolio() {
   return (
