@@ -1,3 +1,5 @@
+"use server";
+
 const nodemailer = require("nodemailer");
 import { EMAIL_CONFIGS } from "@/utils";
 import { EMAIL_TYPE } from "../types";
