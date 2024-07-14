@@ -67,7 +67,7 @@ export function Navbar() {
       "resize",
       () => window.innerWidth >= 960 && setOpen(false)
     );
-  }, []);
+  }, [setOpen]);
 
   return (
     <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50 dark:bg-primaryBlack-600">

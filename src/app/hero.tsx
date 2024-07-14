@@ -2,8 +2,19 @@
 
 import Image from "next/image";
 import { Input, Button, Typography } from "@material-tailwind/react";
+import useContacts from "./(pages)/hooks/useContacts";
+import { useCallback, useState } from "react";
 
 function Hero() {
+  const { isLoading, proceedGetInTouch } = useContacts();
+
+  const [email, setEmail] = useState<string>("");
+
+  const handleSendEmail = useCallback(async () => {
+    await proceedGetInTouch({ email });
+    setEmail("");
+  }, [email, setEmail, proceedGetInTouch]);
+
   return (
     <header className="bg-white p-8 dark:bg-primaryBlack-600">
       <div className="container mx-auto grid h-full gap-10 min-h-[60vh] w-full grid-cols-1 items-center lg:grid-cols-2">
@@ -32,9 +43,21 @@ function Hero() {
             </Typography>
             <div className="mb-2 flex w-full flex-col gap-4 md:w-10/12 md:flex-row">
               {/* @ts-ignore */}
-              <Input color="gray" label="Enter your email" size="lg" />
-              <Button color="gray" className="w-full px-4 md:w-[12rem]">
-                get in touch
+              <Input
+                color="gray"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                label="Enter your email"
+                size="lg"
+                className="dark:text-gray-500"
+              />
+              <Button
+                color="gray"
+                disabled={isLoading}
+                onClick={handleSendEmail}
+                className="w-full px-4 md:w-[12rem]"
+              >
+                {isLoading ? "Sending..." : "get in touch"}
               </Button>
             </div>
           </div>
@@ -48,7 +71,7 @@ function Hero() {
           alt="Frank Fontcha"
           src="/image/franky.jpg"
           className="h-[500px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 grayscale object-cover"
-          style={{objectPosition: 'top'}}
+          style={{ objectPosition: "top" }}
         />
       </div>
     </header>

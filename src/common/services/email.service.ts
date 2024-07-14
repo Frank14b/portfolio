@@ -4,11 +4,12 @@ const nodemailer = require("nodemailer");
 import { EMAIL_CONFIGS } from "@/utils";
 import { EMAIL_TYPE } from "../types";
 
-export const _sendEmail = async ({
+export const sendEmail = async ({
   subject,
   message,
   attachments,
   type,
+  from,
   to,
 }: {
   subject: string;
@@ -24,22 +25,29 @@ export const _sendEmail = async ({
     }
   ];
   type: EMAIL_TYPE;
-  to: string;
+  from?: string;
+  to?: string;
 }) => {
   try {
-    // Create a SMTP transporter object
     let transporter = nodemailer.createTransport({
-      sendmail: true,
-      newline: "windows",
-      logger: true,
+      host: EMAIL_CONFIGS.options.hostname,
+      port: 587, //EMAIL_CONFIGS.options.port,
+      auth: {
+        user: EMAIL_CONFIGS.options.username,
+        pass: EMAIL_CONFIGS.options.password,
+      },
+      secure: false,
+      tls: {
+        rejectUnauthorized: false // only for testing
+      }
     });
 
     // Message object
     let data = {
-      from: EMAIL_CONFIGS.options.from, // 'Andris <andris@kreata.ee>',
+      from: from ?? EMAIL_CONFIGS.options.from, // 'Andris <andris@kreata.ee>',
       // Comma separated list of recipients
-      to: to, //"Andris Reinman <andris.reinman@gmail.com>",
-      bcc: "andris@ethereal.email",
+      to: to ?? EMAIL_CONFIGS.options.from, //"Andris Reinman <andris.reinman@gmail.com>",
+      bcc: to ?? EMAIL_CONFIGS.options.from, //"andris@ethereal.email",
       // Subject of the message
       subject: subject, //"Nodemailer is unicode friendly ✔",
       // plaintext body
@@ -51,8 +59,8 @@ export const _sendEmail = async ({
     };
 
     let info = await transporter.sendMail(data);
-    console.log("Message sent successfully as %s", info.messageId);
+    return info?.messageId;
   } catch (error) {
-    console.log("🚀 ~ error:", error)
+    return null;
   }
 };

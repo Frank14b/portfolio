@@ -12,8 +12,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Frank Donald Fontcha | Software Engineer",
-  description:
-    "Introducing Tailwind Portfolio Page, a versatile and stylish portfolio template built on the foundation of Tailwind CSS and Material Tailwind.",
+  description: "Here, you&apos;ll get a glimpse of my journey in the world of Software Development, where creativity meets functionality.",
 };
 
 export default function RootLayout({
@@ -32,9 +31,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
       <body className={roboto.className}>
-        <Layout>
-          {children}
-        </Layout>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );
