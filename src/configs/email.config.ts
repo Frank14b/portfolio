@@ -1,4 +1,4 @@
-import { ENV_CONFIG } from "./";
+import { ENV_CONFIG } from ".";
 
 const options = {
   ...ENV_CONFIG.SMTP,

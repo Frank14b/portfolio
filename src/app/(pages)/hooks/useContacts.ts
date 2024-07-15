@@ -1,5 +1,4 @@
-import { sendEmail } from "@/common/services";
-import { EMAIL_TYPE } from "@/common/types";
+import { sendGetInTouchEmail } from "@/common/services";
 import { notification } from "@/utils/notifications";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
@@ -14,14 +13,9 @@ const useContacts = () => {
       if (!email) return;
 
       setIsLoading(true);
-      const result = await sendEmail({
-        subject: "Test Message Frank Fontcha",
-        message: {
-          isHtml: true,
-          content: "<p>Test Message Frank Fontcha</p>",
-        },
-        type: EMAIL_TYPE.CONTACT,
-        to: email,
+
+      const result = await sendGetInTouchEmail({
+        email,
       });
 
       if (result) {

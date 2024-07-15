@@ -1,58 +1,40 @@
 "use server";
 
-const nodemailer = require("nodemailer");
-import { EMAIL_CONFIGS } from "@/utils";
 import { EMAIL_TYPE } from "../types";
+import {
+  readHTMLFileAsync,
+  replaceVariablesAsync,
+  sendEmail,
+} from "./email.service";
+import { EMAIL_FILE_URL } from "@/configs/app.config";
 
-export const _sendEmail = async ({
-  subject,
-  message,
-  attachments,
-  type,
-  to,
-}: {
-  subject: string;
-  message: {
-    isHtml: boolean;
-    content: string;
-  };
-  attachments?: [
-    {
-      filename: string;
-      content: Buffer;
-      cid?: string;
-    }
-  ];
-  type: EMAIL_TYPE;
-  to: string;
-}) => {
+export const sendGetInTouchEmail = async ({ email }: { email: string }) => {
   try {
-    // Create a SMTP transporter object
-    let transporter = nodemailer.createTransport({
-      sendmail: true,
-      newline: "windows",
-      logger: true,
+    const emailCore = await readHTMLFileAsync(EMAIL_FILE_URL.core);
+    const emailBody = await readHTMLFileAsync(EMAIL_FILE_URL.contact);
+    //
+    const finalHTML = await replaceVariablesAsync(emailBody, {
+      title: "Hello Welcome to my page!",
+      subTitle: "Hello Welcome to my page!",
+      content: "This is some content.",
+      welcomeImage: "https://t4.ftcdn.net/jpg/04/03/62/35/360_F_403623508_OhrbkZ1zc2NzB9mN1d2ZcO1WrBDGKsxY.jpg"
     });
 
-    // Message object
-    let data = {
-      from: EMAIL_CONFIGS.options.from, // 'Andris <andris@kreata.ee>',
-      // Comma separated list of recipients
-      to: to, //"Andris Reinman <andris.reinman@gmail.com>",
-      bcc: "andris@ethereal.email",
-      // Subject of the message
-      subject: subject, //"Nodemailer is unicode friendly ✔",
-      // plaintext body
-      text: !message.isHtml ? message.content : "",
-      // HTML body
-      html: message.isHtml ? message.content : "",
-      // An array of attachments
-      attachments: attachments ?? [],
-    };
+    const emailCoreHTML = await replaceVariablesAsync(emailCore, {
+      title: "Welcome",
+      body: finalHTML,
+    });
 
-    let info = await transporter.sendMail(data);
-    console.log("Message sent successfully as %s", info.messageId);
+    return await sendEmail({
+      subject: "Hello Welcome to my page!",
+      message: {
+        isHtml: true,
+        content: emailCoreHTML,
+      },
+      type: EMAIL_TYPE.CONTACT,
+      to: email,
+    });
   } catch (error) {
-    console.log("🚀 ~ error:", error)
+    return null;
   }
 };

@@ -1,8 +1,10 @@
 "use server";
 
 const nodemailer = require("nodemailer");
-import { EMAIL_CONFIGS } from "@/utils";
-import { EMAIL_TYPE } from "../types";
+import { EMAIL_CONFIGS } from "@/configs";
+import { EMAIL_TYPE, ObjectKeyDto } from "../types";
+// Import necessary modules
+import fs from "fs";
 
 export const sendEmail = async ({
   subject,
@@ -38,8 +40,8 @@ export const sendEmail = async ({
       },
       secure: false,
       tls: {
-        rejectUnauthorized: false // only for testing
-      }
+        rejectUnauthorized: false, // only for testing
+      },
     });
 
     // Message object
@@ -64,3 +66,37 @@ export const sendEmail = async ({
     return null;
   }
 };
+
+// Function to read HTML template file
+const readHTMLFileAsync = (filePath: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, "utf8", (err, html) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(html);
+      }
+    });
+  });
+};
+
+// Function to replace variables in HTML template
+const replaceVariablesAsync = (
+  html: string,
+  variables: ObjectKeyDto
+): Promise<string> => {
+  return new Promise((resolve, _) => {
+    let replacedHtml = html;
+
+    Object.keys(variables).map((key) => {
+      replacedHtml = replacedHtml.replace(
+        new RegExp(`{{${key}}}`, "g"),
+        variables[key]
+      );
+    });
+
+    return resolve(replacedHtml);
+  });
+};
+
+export { readHTMLFileAsync, replaceVariablesAsync };
