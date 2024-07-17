@@ -24,7 +24,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
             color="blue-gray"
             className="mb-4 lg:text-5xl !leading-tight text-3xl text-white"
           >
-            Hello Guy's <br /> Welcome to my Page!
+            Hello Guy&apos;s <br /> Welcome to my Page!
           </Typography>
           <Typography
             variant="lead"
@@ -62,7 +62,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
             </div>
           </div>
           <Typography variant="small" className="font-normal !text-gray-500">
-            Let's meet and discuss{" "}
+            Let&apos;s meet and discuss{" "}
           </Typography>
         </div>
         <Image

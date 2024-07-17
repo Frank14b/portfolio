@@ -13,7 +13,6 @@ import { UseFormHandleSubmit } from "react-hook-form";
 const useContacts = () => {
   //
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const { handleSubmit, reset } = useAppForm({
     schema: ContactFormSchema(),
@@ -44,7 +43,7 @@ const useContacts = () => {
 
       return result;
     },
-    [router, setIsLoading]
+    [setIsLoading]
   );
 
   const proceedSubmitFormContact = useCallback(
@@ -58,7 +57,7 @@ const useContacts = () => {
 
       setIsLoading(false);
     },
-    [notification, reset]
+    [reset]
   );
 
   const data: ContactHookDto = {
