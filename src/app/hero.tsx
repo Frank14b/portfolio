@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { Input, Button, Typography } from "@material-tailwind/react";
-import useContacts from "./(pages)/hooks/useContacts";
+import { ContactHookDto } from "./(pages)/hooks/useContacts";
 import { useCallback, useState } from "react";
 
-function Hero() {
-  const { isLoading, proceedGetInTouch } = useContacts();
-
+function Hero({ contactHook }: { contactHook: ContactHookDto }) {
+  //
+  const { isLoading, proceedGetInTouch } = contactHook;
   const [email, setEmail] = useState<string>("");
 
   const handleSendEmail = useCallback(async () => {
@@ -70,7 +70,7 @@ function Hero() {
           height={1024}
           alt="Frank Fontcha"
           src="/image/franky.jpg"
-          className="h-[500px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 grayscale object-cover"
+          className="h-[500px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 object-cover"
           style={{ objectPosition: "top" }}
         />
       </div>

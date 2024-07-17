@@ -31,3 +31,11 @@ export type ResultPaginate<T> = {
 };
 
 export type ObjectKeyDto = { [key: string]: any };
+
+export type ContactFormDto = {
+  name: string;
+  email: string;
+  interest: string;
+  message: string;
+  phone: string;
+};

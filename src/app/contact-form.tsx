@@ -1,21 +1,27 @@
 "use client";
 
-import {
-  Typography,
-  Card,
-  CardBody,
-  Radio,
-  Input,
-  Textarea,
-  Button,
-} from "@material-tailwind/react";
+import { Typography, Card, CardBody, Button } from "@material-tailwind/react";
 import { EnvelopeIcon, PhoneIcon, TicketIcon } from "@heroicons/react/24/solid";
+import { ContactHookDto } from "./(pages)/hooks/useContacts";
+import {
+  RadioField,
+  MultiLineInputField,
+  InputField,
+} from "@/common/ui-elements";
+import { CONTACT_INTEREST } from "@/constants";
 
-export function ContactForm() {
+export function ContactForm({ contactHook }: { contactHook: ContactHookDto }) {
+  //
+  const { isLoading, handleSubmit, proceedSubmitFormContact } = contactHook;
+
   return (
     <section className="px-8 py-16 dark:bg-primaryBlack-600">
       <div className="container mx-auto mb-20 text-center">
-        <Typography variant="h1" color="blue-gray" className="mb-4 dark:text-white">
+        <Typography
+          variant="h1"
+          color="blue-gray"
+          className="mb-4 dark:text-white"
+        >
           Contact Me
         </Typography>
         <Typography
@@ -37,8 +43,7 @@ export function ContactForm() {
                 variant="lead"
                 className="mx-auto mb-8 text-base !text-gray-500"
               >
-                Fill up the form and i will get back to you within 24
-                hours.
+                Fill up the form and i will get back to you within 24 hours.
               </Typography>
               <div className="flex gap-5">
                 <PhoneIcon className="h-6 w-6 text-white" />
@@ -71,79 +76,67 @@ export function ContactForm() {
               </div> */}
             </div>
             <div className="w-full mt-8 md:mt-0 md:px-10 col-span-4 h-full p-5">
-              <form action="#">
-                <div className="mb-8 grid gap-4 lg:grid-cols-2">
-                  {/* @ts-ignore */}
-                  <Input
-                    color="gray"
-                    size="lg"
-                    variant="static"
-                    label="First Name"
-                    name="first-name"
-                    placeholder="eg. Lucas"
-                    containerProps={{
-                      className: "!min-w-full mb-3 md:mb-0",
-                    }}
-                  />
-                  {/* @ts-ignore */}
-                  <Input
-                    color="gray"
-                    size="lg"
-                    variant="static"
-                    label="Last Name"
-                    name="last-name"
-                    placeholder="eg. Jones"
-                    containerProps={{
-                      className: "!min-w-full",
+              <form onSubmit={handleSubmit(proceedSubmitFormContact)}>
+                {/* @ts-ignore */}
+                <div className="mb-5">
+                  <InputField
+                    data={{
+                      name: "name",
+                      title: "Enter Your Name",
+                      placeholder: "",
                     }}
                   />
                 </div>
                 {/* @ts-ignore */}
-                <Input
-                  color="gray"
-                  size="lg"
-                  variant="static"
-                  label="Email"
-                  name="first-name"
-                  placeholder="eg. lucas@mail.com"
-                  containerProps={{
-                    className: "!min-w-full mb-8",
-                  }}
-                />
+                <div className="mb-5">
+                  <InputField
+                    data={{
+                      name: "email",
+                      title: "Enter Your Email",
+                      type: "email",
+                      placeholder: "",
+                    }}
+                  />
+                </div>
+
                 <Typography
                   variant="lead"
                   className="!text-blue-gray-500 text-sm mb-2"
                 >
                   What are you interested on?
                 </Typography>
-                <div className="-ml-3 mb-14 ">
+                <div className="-ml-3 mb-14 lg:flex md:block">
                   {/* @ts-ignore */}
-                  <Radio
-                    color="gray"
-                    name="type"
-                    label="Design"
-                    defaultChecked
-                  />
-                  {/* @ts-ignore */}
-                  <Radio color="gray" name="type" label="Development" />
-                  {/* @ts-ignore */}
-                  <Radio color="gray" name="type" label="Support" />
-                  {/* @ts-ignore */}
-                  <Radio color="gray" name="type" label="Other" />
+                  {CONTACT_INTEREST.map((item, index) => (
+                    <RadioField
+                      key={index}
+                      data={{
+                        type: "radio",
+                        name: "interest",
+                        value: item.key,
+                        title: item.value,
+                      }}
+                    />
+                  ))}
                 </div>
                 {/* @ts-ignore */}
-                <Textarea
-                  color="gray"
-                  size="lg"
-                  variant="static"
-                  label="Your Message"
-                  name="first-name"
-                  containerProps={{
-                    className: "!min-w-full mb-8",
-                  }}
-                />
+                <div className="mb-5">
+                  <MultiLineInputField
+                    data={{
+                      name: "message",
+                      title: "Enter Your Message",
+                      placeholder: "",
+                    }}
+                  />
+                </div>
                 <div className="w-full flex justify-end">
-                  <Button className="w-full md:w-fit" color="gray" size="md">
+                  <Button
+                    disabled={isLoading}
+                    className="w-full md:w-fit"
+                    color="gray"
+                    size="md"
+                    type="submit"
+                  >
                     Send message
                   </Button>
                 </div>
