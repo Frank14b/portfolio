@@ -26,7 +26,7 @@ const useContacts = () => {
 
   const proceedGetInTouch = useCallback(
     async ({ email }: { email: string }) => {
-      if (!email) return;
+      if (!email) return null;
 
       setIsLoading(true);
 
@@ -42,7 +42,7 @@ const useContacts = () => {
 
       setIsLoading(false);
 
-      return result;
+      return "-";
     },
     [setIsLoading]
   );
