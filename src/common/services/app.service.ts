@@ -40,7 +40,11 @@ export const sendGetInTouchEmail = async ({ email }: { email: string }) => {
       to: email,
     });
   } catch (error) {
-    return null;
+    console.log("🚀 ~ sendGetInTouchEmail ~ error:", error)
+    return {
+      status: false,
+      error
+    };
   }
 };
 

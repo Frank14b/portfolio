@@ -6,7 +6,6 @@ import {
 import { ContactFormDto } from "@/common/types";
 import { ContactFormSchema } from "@/common/validators";
 import { notification } from "@/utils/notifications";
-import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { UseFormHandleSubmit } from "react-hook-form";
 
@@ -35,8 +34,10 @@ const useContacts = () => {
         email,
       });
 
-      if (result) {
+      if (result.status) {
         notification.notifySuccess("Successfully Send.");
+      }else{
+        console.log(result);
       }
 
       setIsLoading(false);

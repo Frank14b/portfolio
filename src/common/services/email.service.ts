@@ -61,9 +61,16 @@ export const sendEmail = async ({
     };
 
     let info = await transporter.sendMail(data);
-    return info?.messageId;
+    return {
+      status: true,
+      id: info?.messageId
+    };
   } catch (error) {
-    return null;
+    console.log("🚀 ~ error:", error)
+    return {
+      status: false,
+      error: error
+    };
   }
 };
 

@@ -19,8 +19,14 @@ const config: Config = withMT({
         700: "#051E51",
         800: "#041332",
         900: "#000715",
-      }
-    }
+      },
+    },
+    screens: {
+      xs: { max: "640px" },
+      csm: { max: "992px" },
+      "min-sm": { min: "992px" },
+      large: { min: "1700px" },
+    },
   },
   plugins: [],
 });

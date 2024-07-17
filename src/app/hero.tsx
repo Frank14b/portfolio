@@ -70,7 +70,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
           height={1024}
           alt="Frank Fontcha"
           src="/image/franky.jpg"
-          className="h-[500px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 object-cover"
+          className="min-sm:h-[500px] csm:h-[300px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 object-cover"
           style={{ objectPosition: "top" }}
         />
       </div>
