@@ -10,20 +10,14 @@ import {
   getFirestore,
   onSnapshot,
 } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
+import { ENV_CONFIG } from "./env.config";
+
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDF5TTuzky0ipR3vJOUdM_epsc3oIaKNFE",
-  authDomain: "portfolio-blog-152ac.firebaseapp.com",
-  databaseURL: "https://portfolio-blog-152ac-default-rtdb.firebaseio.com",
-  projectId: "portfolio-blog-152ac",
-  storageBucket: "portfolio-blog-152ac.appspot.com",
-  messagingSenderId: "781062077619",
-  appId: "1:781062077619:web:4dc96344e90ca69cdc44c6",
-  measurementId: "G-ED020WLMGZ",
+  ...ENV_CONFIG.firebase,
 };
 
 // Initialize Firebase
