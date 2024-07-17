@@ -8,6 +8,7 @@ import { ContactFormSchema } from "@/common/validators";
 import { notification } from "@/utils/notifications";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { UseFormHandleSubmit } from "react-hook-form";
+import { json } from "stream/consumers";
 
 const useContacts = () => {
   //
@@ -37,7 +38,7 @@ const useContacts = () => {
       if (result.status) {
         notification.notifySuccess("Successfully Send.");
       }else{
-        console.log(result);
+        console.log(JSON.stringify(result));
       }
 
       setIsLoading(false);
