@@ -17,11 +17,7 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
 
-// import * as pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs";
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
+import * as pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs";
 
 export default function ResumeReaderComponent({
   children,
@@ -31,11 +27,11 @@ export default function ResumeReaderComponent({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
-  // useEffect(() => {
-  //   if (pdfjsWorker) {
-  //     // pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (pdfjsWorker) {
+      // pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
+    }
+  }, []);
 
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
