@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Input, Button, Typography } from "@material-tailwind/react";
 import { ContactHookDto } from "./(pages)/hooks/useContacts";
 import { useCallback, useState } from "react";
+import AnimateHoverScale from "@/common/motions/AnimateHoverScale";
 
 function Hero({ contactHook }: { contactHook: ContactHookDto }) {
   //
@@ -16,7 +17,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
   }, [email, setEmail, proceedGetInTouch]);
 
   return (
-    <header className="bg-white p-8 dark:bg-primaryBlack-600">
+    <header className="bg-white p-8 dark:bg-gray-900">
       <div className="container mx-auto grid h-full gap-10 min-h-[60vh] w-full grid-cols-1 items-center lg:grid-cols-2">
         <div className="row-start-2 lg:row-auto">
           <Typography
@@ -65,14 +66,17 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
             Let&apos;s meet and discuss{" "}
           </Typography>
         </div>
-        <Image
-          width={1024}
-          height={1024}
-          alt="Frank Fontcha"
-          src="/image/franky.jpg"
-          className="min-sm:h-[500px] csm:h-[300px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 object-cover"
-          style={{ objectPosition: "top" }}
-        />
+
+        <AnimateHoverScale index={1} active={true}>
+          <Image
+            width={1024}
+            height={1024}
+            alt="Frank Fontcha"
+            src="/image/franky.jpg"
+            className="min-sm:h-[500px] mx-auto min-sm:w-[500px] csm:h-[300px] csm:w-[300px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 border-primaryBlue object-cover"
+            style={{ objectPosition: "top" }}
+          />
+        </AnimateHoverScale>
       </div>
     </header>
   );

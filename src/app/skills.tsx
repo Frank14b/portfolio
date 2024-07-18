@@ -10,6 +10,7 @@ import {
   DocumentTextIcon,
 } from "@heroicons/react/24/solid";
 import { SkillCard } from "@/common/components";
+import AnimateHoverScale from "@/common/motions/AnimateHoverScale";
 
 const SKILLS = [
   {
@@ -54,24 +55,33 @@ export function Skills() {
   return (
     <section className="px-8 pt-20 dark:bg-primaryBlack-600">
       <div className="container mx-auto mb-20 text-center">
-        <Typography color="blue-gray" className="mb-2 font-bold uppercase dark:text-gray-300">
+        <Typography
+          color="blue-gray"
+          className="mb-2 font-bold uppercase dark:text-gray-300"
+        >
           my skills
         </Typography>
-        <Typography variant="h1" color="blue-gray" className="mb-4 dark:text-white">
+        <Typography
+          variant="h1"
+          color="blue-gray"
+          className="mb-4 dark:text-white"
+        >
           What I do
         </Typography>
         <Typography
           variant="lead"
           className="mx-auto w-full !text-gray-500 lg:w-10/12"
         >
-          I&apos;m not just a developer; I&apos;m a functional analyst.
-          Crafting immersive online experiences is not just a job but my
-          calling. Discover below how I can help you.
+          I&apos;m not just a developer; I&apos;m a functional analyst. Crafting
+          immersive online experiences is not just a job but my calling.
+          Discover below how I can help you.
         </Typography>
       </div>
-      <div className="container mx-auto grid grid-cols-1 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="container mx-auto grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {SKILLS.map((props, idx) => (
-          <SkillCard key={idx} {...props} />
+          <AnimateHoverScale key={idx} index={idx} active={true}>
+            <SkillCard {...props} />
+          </AnimateHoverScale>
         ))}
       </div>
     </section>

@@ -132,7 +132,7 @@ export function ContactForm({ contactHook }: { contactHook: ContactHookDto }) {
                 <div className="w-full flex justify-end">
                   <Button
                     disabled={isLoading}
-                    className="w-full md:w-fit"
+                    className="w-full md:w-fit bg-primaryBlue"
                     color="gray"
                     size="md"
                     type="submit"

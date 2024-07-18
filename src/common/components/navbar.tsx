@@ -72,8 +72,8 @@ export function Navbar() {
   return (
     <MTNavbar shadow={false} fullWidth className="border-0 sticky top-0 z-50 dark:bg-primaryBlack-600">
       <div className="container mx-auto flex items-center justify-between">
-        <Typography color="blue-gray" className="text-lg font-bold dark:text-white flex gap-2">
-        <CommandLineIconOutline className="h-5 w-5 mt-1"/> Frank Fontcha
+        <Typography color="blue-gray" className="text-lg font-bold dark:text-primaryBlue flex gap-2">
+        <CommandLineIconOutline className="h-5 w-5 mt-1"/> FF.
         </Typography>
         <ul className="ml-10 hidden items-center gap-8 lg:flex">
           {NAV_MENU.map(({ name, icon: Icon, href }) => (
@@ -86,7 +86,7 @@ export function Navbar() {
         <div className="hidden items-center gap-2 lg:flex">
           <Button variant="text" className="dark:text-gray-200">Sign In</Button>
           <a href="#">
-            <Button color="gray">Sign Up</Button>
+            <Button color="gray" className="bg-primaryBlue">Sign Up</Button>
           </a>
         </div>
         <IconButton

@@ -20,6 +20,7 @@ const config: Config = withMT({
         800: "#041332",
         900: "#000715",
       },
+      primaryBlue: "#64b5f6"
     },
     screens: {
       xs: { max: "640px" },
