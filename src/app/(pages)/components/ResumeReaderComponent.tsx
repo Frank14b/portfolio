@@ -17,7 +17,7 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
 
-import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs';
+import * as pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs";
 
 export default function ResumeReaderComponent({
   children,
@@ -28,7 +28,7 @@ export default function ResumeReaderComponent({
   const handleOpen = () => setOpen(!open);
 
   useEffect(() => {
-    if(pdfjsWorker) {
+    if (pdfjsWorker) {
       // pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
     }
   }, []);
@@ -42,45 +42,47 @@ export default function ResumeReaderComponent({
   return (
     <>
       <span onClick={handleOpen}>{children}</span>
-      <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>
-          <div className="text-center w-full">Resume</div>
-        </DialogHeader>
-        <DialogBody className="max-h-[80vh] overflow-y-auto">
-          <Document
-            file={"/pdf/sample-resume.pdf"}
-            onLoadError={console.error}
-            onLoadSuccess={onDocumentLoadSuccess}
-          >
-            <Page pageNumber={pageNumber} />
-          </Document>
-        </DialogBody>
-        <DialogFooter>
-          <div className="flex justify-between w-full">
-            <Button size="sm" className="bg-red-800" onClick={handleOpen}>
-              close
-            </Button>
-            <div className="flex gap-4">
-              {pageNumber > 1 && (
-                <ArrowLeftCircleIcon
-                  onClick={() => setPageNumber(pageNumber - 1)}
-                  className="size-5 mt-[0.2em] cursor-pointer"
-                />
-              )}
-              <span>
-                {pageNumber} / <b>{numPages}</b>
-              </span>
-              {pageNumber < numPages && (
-                <ArrowRightCircleIcon
-                  onClick={() => setPageNumber(pageNumber + 1)}
-                  className="size-5 mt-[0.2em] cursor-pointer"
-                />
-              )}
+      {open && (
+        <Dialog open={open} handler={handleOpen}>
+          <DialogHeader>
+            <div className="text-center w-full">Resume</div>
+          </DialogHeader>
+          <DialogBody className="max-h-[80vh] overflow-y-auto">
+            <Document
+              file={"/pdf/frank_resume.pdf"}
+              onLoadError={console.error}
+              onLoadSuccess={onDocumentLoadSuccess}
+            >
+              <Page pageNumber={pageNumber} />
+            </Document>
+          </DialogBody>
+          <DialogFooter>
+            <div className="flex justify-between w-full">
+              <Button size="sm" className="bg-red-800" onClick={handleOpen}>
+                close
+              </Button>
+              <div className="flex gap-4">
+                {pageNumber > 1 && (
+                  <ArrowLeftCircleIcon
+                    onClick={() => setPageNumber(pageNumber - 1)}
+                    className="size-5 mt-[0.2em] cursor-pointer"
+                  />
+                )}
+                <span>
+                  {pageNumber} / <b>{numPages}</b>
+                </span>
+                {pageNumber < numPages && (
+                  <ArrowRightCircleIcon
+                    onClick={() => setPageNumber(pageNumber + 1)}
+                    className="size-5 mt-[0.2em] cursor-pointer"
+                  />
+                )}
+              </div>
+              <Button size="sm">Download</Button>
             </div>
-            <Button size="sm">Download</Button>
-          </div>
-        </DialogFooter>
-      </Dialog>
+          </DialogFooter>
+        </Dialog>
+      )}
     </>
   );
 }
