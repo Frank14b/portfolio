@@ -4,6 +4,20 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Layout } from "@/common/components";
 
+import 'core-js/full/promise/with-resolvers.js';
+
+Promise.withResolvers = function <T>(): PromiseWithResolvers<T> {
+  let resolve: (value: T | PromiseLike<T>) => void = () => {}; // Define resolve with specific type T
+  let reject: (reason?: any) => void = () => {};
+
+  const promise = new Promise((res: any, rej: any): any => {
+    resolve = res;
+    reject = rej;
+  });
+
+  return { promise: promise as Promise<T>, resolve, reject };
+};
+
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700", "900"],

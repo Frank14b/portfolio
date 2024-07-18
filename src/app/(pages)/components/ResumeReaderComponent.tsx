@@ -19,34 +19,6 @@ import {
 
 import * as pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs";
 
-import 'core-js/full/promise/with-resolvers.js';
-
-// Polyfill for environments where window is not available (e.g., server-side rendering)
-// if (typeof Promise.withResolvers === "undefined") {
-  // if (typeof window !== "undefined") {
-  //   window.Promise.withResolvers = function () {
-  //     let resolve, reject;
-  //     const promise = new Promise((res, rej) => {
-  //       resolve = res;
-  //       reject = rej;
-  //     });
-  //     return { promise, resolve, reject };
-  //   };
-  // } else {
-    Promise.withResolvers = function <T>(): PromiseWithResolvers<T> {
-      let resolve: (value: T | PromiseLike<T>) => void = () => {}; // Define resolve with specific type T
-      let reject: (reason?: any) => void = () => {};
-
-      const promise = new Promise((res: any, rej: any): any => {
-        resolve = res;
-        reject = rej;
-      });
-
-      return { promise: promise as Promise<T>, resolve, reject };
-    };
-  // }
-// }
-
 export default function ResumeReaderComponent({
   children,
 }: {
