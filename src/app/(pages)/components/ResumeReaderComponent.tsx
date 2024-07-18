@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import {
   Button,
@@ -10,17 +10,14 @@ import {
   DialogHeader,
 } from "@material-tailwind/react";
 
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.min.mjs",
-//   import.meta.url
-// ).toString();
-
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
+
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs';
 
 export default function ResumeReaderComponent({
   children,
@@ -30,6 +27,12 @@ export default function ResumeReaderComponent({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
+  useEffect(() => {
+    if(pdfjsWorker) {
+      pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
+    }
+  }, []);
+
   const [numPages, setNumPages] = useState<number>(1);
   const [pageNumber, setPageNumber] = useState<number>(1);
   function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
@@ -38,7 +41,7 @@ export default function ResumeReaderComponent({
 
   return (
     <>
-      <div onClick={handleOpen}>{children}</div>
+      <span onClick={handleOpen}>{children}</span>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>
           <div className="text-center w-full">Resume</div>

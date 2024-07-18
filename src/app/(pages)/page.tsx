@@ -18,8 +18,8 @@ export default function Portfolio() {
       <Navbar />
       <Hero contactHook={contactHook} />
       <Skills />
-      {/* <Resume /> */}
       <ContactForm contactHook={contactHook} />
+      {/* <Resume /> */}
       <Footer />
     </div>
   );

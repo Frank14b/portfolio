@@ -4,7 +4,8 @@ import Image from "next/image";
 import { Input, Button, Typography } from "@material-tailwind/react";
 import { ContactHookDto } from "./(pages)/hooks/useContacts";
 import { useCallback, useState } from "react";
-import AnimateHoverScale from "@/common/motions/AnimateHoverScale";
+import ResumeReaderComponent from "./(pages)/components/ResumeReaderComponent";
+import { AnimateInfiniteScale } from "../common/motions";
 
 function Hero({ contactHook }: { contactHook: ContactHookDto }) {
   //
@@ -34,6 +35,11 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
             I&apos;m Frank Donald Kamga Fontcha, a passionate Software Engineer
             based in UAE. Here, you&apos;ll get a glimpse of my journey in the
             world of Software Development, where creativity meets functionality.
+            <ResumeReaderComponent>
+              <a className="text-primaryBlue text-sm mx-2 cursor-pointer">
+                View More...
+              </a>
+            </ResumeReaderComponent>
           </Typography>
           <div className="grid">
             <Typography
@@ -67,7 +73,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
           </Typography>
         </div>
 
-        <AnimateHoverScale index={1} active={true}>
+        <AnimateInfiniteScale index={1} active={true}>
           <Image
             width={1024}
             height={1024}
@@ -76,7 +82,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
             className="min-sm:h-[500px] mx-auto min-sm:w-[500px] csm:h-[300px] csm:w-[300px] mt-10 mb-5 rounded-full mt-5 shadow-lg border-4 border-primaryBlue object-cover"
             style={{ objectPosition: "top" }}
           />
-        </AnimateHoverScale>
+        </AnimateInfiniteScale>
       </div>
     </header>
   );
