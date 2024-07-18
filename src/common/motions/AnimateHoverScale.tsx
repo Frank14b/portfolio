@@ -16,6 +16,7 @@ export default function AnimateHoverScale({
       initial={{ opacity: 0, scale: 1 }}
       transition={{ duration: 0.2 + index / 10 }}
       whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 1.05 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: once }}
     >

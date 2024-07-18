@@ -6,11 +6,22 @@ import { ContactHookDto } from "./(pages)/hooks/useContacts";
 import { useCallback, useState } from "react";
 import ResumeReaderComponent from "./(pages)/components/ResumeReaderComponent";
 import { AnimateInfiniteScale } from "../common/motions";
+import useTypeWriter from "@/common/hooks/useTypeWriter";
 
 function Hero({ contactHook }: { contactHook: ContactHookDto }) {
   //
   const { isLoading, proceedGetInTouch } = contactHook;
   const [email, setEmail] = useState<string>("");
+
+  const heroTitle = useTypeWriter({
+    text: "Hello Guy's",
+    speed: 200,
+  });
+  
+  const heroSecondTitle = useTypeWriter({
+    text: "Welcome to my Page!",
+    speed: 150,
+  });
 
   const handleSendEmail = useCallback(async () => {
     await proceedGetInTouch({ email });
@@ -26,7 +37,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
             color="blue-gray"
             className="mb-4 lg:text-5xl !leading-tight text-3xl text-white"
           >
-            Hello Guy&apos;s <br /> Welcome to my Page!
+            {heroTitle.displayedText} <br /> {heroSecondTitle.displayedText}
           </Typography>
           <Typography
             variant="lead"

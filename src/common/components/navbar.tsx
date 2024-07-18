@@ -23,30 +23,33 @@ const NAV_MENU = [
   {
     name: "Home",
     icon: RectangleStackIcon,
+    href: "/"
   },
   {
     name: "Contacts",
     icon: UserCircleIcon,
+    href: "/#contacts"
   },
   {
     name: "Blog",
     icon: CommandLineIcon,
-    href: "#",
+    href: "/blogs",
   },
 ];
 
 interface NavItemProps {
   children: React.ReactNode;
   href?: string;
+  target?: string;
 }
 
-function NavItem({ children, href }: NavItemProps) {
+function NavItem({ children, href, target }: NavItemProps) {
   return (
     <li>
       <Typography
         as="a"
         href={href || "#"}
-        target={href ? "_blank" : "_self"}
+        target={target ?? "_self"}
         variant="paragraph"
         color="gray"
         className="flex items-center gap-2 font-medium text-gray-900 dark:text-gray-300"

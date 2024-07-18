@@ -15,7 +15,7 @@ export function ContactForm({ contactHook }: { contactHook: ContactHookDto }) {
   const { isLoading, handleSubmit, proceedSubmitFormContact } = contactHook;
 
   return (
-    <section className="px-8 py-16 dark:bg-primaryBlack-600">
+    <section className="px-8 py-16 dark:bg-primaryBlack-600" id="contacts">
       <div className="container mx-auto mb-20 text-center">
         <Typography
           variant="h1"
