@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/next-script-for-ga */
+import 'core-js/full/promise/with-resolvers.js';
+
 import "../globals.css";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";

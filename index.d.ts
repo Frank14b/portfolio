@@ -4,7 +4,8 @@ declare global {
 	interface Window {
 		opera: any;
 		Worker: Worker;
-	}
+    Promise: Promise
+	};
 }
 
 declare module "react" {
