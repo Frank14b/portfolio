@@ -9,7 +9,7 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="mt-16 flex flex-wrap items-center justify-center gap-y-4 border-t border-gray-200 py-6 md:justify-between">
           <Typography className="text-center font-normal text-gray-700 dark:text-gray-100 text-sm">
-            <b>&copy; {CURRENT_YEAR}</b> Frank Fontcha || Software Engineer.
+            <b>&copy; {CURRENT_YEAR}</b> <span className="text-primaryBlue font-bold">Frank Fontcha</span> || Software Engineer.
           </Typography>
           <ul className="flex gap-8 items-center">
             {LINKS.map((link) => (
