@@ -17,7 +17,7 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
 
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs';
+import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs';
 
 export default function ResumeReaderComponent({
   children,
@@ -29,7 +29,7 @@ export default function ResumeReaderComponent({
 
   useEffect(() => {
     if(pdfjsWorker) {
-      pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
+      // pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
     }
   }, []);
 
