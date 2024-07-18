@@ -19,6 +19,8 @@ import {
 
 import * as pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs";
 
+import 'core-js/full/promise/with-resolvers.js';
+
 // Polyfill for environments where window is not available (e.g., server-side rendering)
 if (typeof Promise.withResolvers === "undefined") {
   if (typeof window !== "undefined") {
