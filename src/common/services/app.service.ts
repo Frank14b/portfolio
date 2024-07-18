@@ -67,6 +67,7 @@ export const proceedSaveContactAsync = async (data: ContactFormDto) => {
   } catch (error) {
     return false;
   }
+  //
 };
 
 export const sendContactEmailAsync = async ({ email }: { email: string }) => {
