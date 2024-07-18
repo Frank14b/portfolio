@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+export default function EmailCore() {
+  return `<!DOCTYPE html>
 <html
   lang="en"
   xmlns="http://www.w3.org/1999/xhtml"
@@ -505,3 +506,5 @@
     </center>
   </body>
 </html>
+`;
+}

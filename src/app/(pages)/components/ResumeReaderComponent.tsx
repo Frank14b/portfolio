@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 import {
   Button,
   Dialog,
@@ -27,6 +27,8 @@ export default function ResumeReaderComponent({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
+  const pdfFile = "/pdf/frank_resume.pdf";
+
   useEffect(() => {
     if (pdfjsWorker) {
       // pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker.toString();
@@ -49,7 +51,7 @@ export default function ResumeReaderComponent({
           </DialogHeader>
           <DialogBody className="max-h-[80vh] overflow-y-auto">
             <Document
-              file={"/pdf/frank_resume.pdf"}
+              file={pdfFile}
               onLoadError={console.error}
               onLoadSuccess={onDocumentLoadSuccess}
             >
@@ -78,7 +80,7 @@ export default function ResumeReaderComponent({
                   />
                 )}
               </div>
-              <Button size="sm">Download</Button>
+              <Button size="sm" onClick={() => window.open(pdfFile, '_blank')}>Download</Button>
             </div>
           </DialogFooter>
         </Dialog>

@@ -3,20 +3,20 @@
 import { addDoc, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { ContactFormDto, EMAIL_TYPE } from "../types";
 import {
-  readHTMLFileAsync,
   replaceVariablesAsync,
   sendEmail,
 } from "./email.service";
-import { EMAIL_FILE_URL } from "@/configs/app.config";
 import {
   collectionRef,
   getSnapShotQueryAsync,
 } from "@/configs/firebase.config";
+import EmailCore from "@/emails/EmailCore";
+import WelcomeEmail from "@/emails/WelcomeEmail";
 
 export const sendGetInTouchEmail = async ({ email }: { email: string }) => {
   try {
-    const emailCore = await readHTMLFileAsync(EMAIL_FILE_URL.core);
-    const emailBody = await readHTMLFileAsync(EMAIL_FILE_URL.contact);
+    const emailCore = EmailCore();
+    const emailBody = WelcomeEmail();
     //
     const finalHTML = await replaceVariablesAsync(emailBody, {
       title: "",
@@ -71,8 +71,8 @@ export const proceedSaveContactAsync = async (data: ContactFormDto) => {
 
 export const sendContactEmailAsync = async ({ email }: { email: string }) => {
   try {
-    const emailCore = await readHTMLFileAsync(EMAIL_FILE_URL.core);
-    const emailBody = await readHTMLFileAsync(EMAIL_FILE_URL.contact);
+    const emailCore = EmailCore();
+    const emailBody = WelcomeEmail();
     //
     const finalHTML = await replaceVariablesAsync(emailBody, {
       title: "",

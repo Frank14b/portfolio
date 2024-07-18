@@ -1,4 +1,5 @@
-<!-- end tr -->
+export default function WelcomeEmail() {
+  return `<!-- end tr -->
 <tr>
   <td
     valign="middle"
@@ -43,3 +44,5 @@
   </td>
 </tr>
 <!-- end: tr -->
+`;
+}
