@@ -1,6 +1,12 @@
 "use client";
 
-import { Typography, Card, CardBody, Button } from "@material-tailwind/react";
+import {
+  Typography,
+  Card,
+  CardBody,
+  Button,
+  IconButton,
+} from "@material-tailwind/react";
 import { EnvelopeIcon, PhoneIcon, TicketIcon } from "@heroicons/react/24/solid";
 import { ContactHookDto } from "./(pages)/hooks/useContacts";
 import {
@@ -10,9 +16,16 @@ import {
 } from "@/common/ui-elements";
 import { CONTACT_INTEREST } from "@/constants";
 
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
+
 export function ContactForm({ contactHook }: { contactHook: ContactHookDto }) {
   //
   const { isLoading, handleSubmit, proceedSubmitFormContact } = contactHook;
+
+  const SOCIAL_LINKS = {
+    github: "https://github.com/Frank14b",
+    linkedIn: "https://www.linkedin.com/in/kamga-fontcha-frank-donald-485933ba"
+  }
 
   return (
     <section className="px-8 py-16 dark:bg-primaryBlack-600" id="contacts">
@@ -63,17 +76,24 @@ export function ContactForm({ contactHook }: { contactHook: ContactHookDto }) {
                   Open Support Ticket
                 </Typography>
               </div>
-              {/* <div className="flex items-center gap-5">
-                <IconButton variant="text" color="white">
-                  <i className="fa-brands fa-facebook text-lg" />
+              <div className="flex items-center gap-5">
+                <IconButton
+                  variant="text"
+                  color="white"
+                  onClick={() => window.open(SOCIAL_LINKS.linkedIn, "_blank")}
+                  className="bg-gray-800"
+                >
+                  <FaLinkedin className="size-6" />
                 </IconButton>
-                <IconButton variant="text" color="white">
-                  <i className="fa-brands fa-instagram text-lg" />
+                <IconButton
+                  variant="text"
+                  color="white"
+                  onClick={() => window.open(SOCIAL_LINKS.github, "_blank")}
+                  className="bg-gray-800"
+                >
+                  <FaGithub className="size-6" />
                 </IconButton>
-                <IconButton variant="text" color="white">
-                  <i className="fa-brands fa-github text-lg" />
-                </IconButton>
-              </div> */}
+              </div>
             </div>
             <div className="w-full mt-8 md:mt-0 md:px-10 col-span-4 h-full p-5">
               <form onSubmit={handleSubmit(proceedSubmitFormContact)}>

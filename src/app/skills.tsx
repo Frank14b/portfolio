@@ -2,25 +2,25 @@
 
 import { Typography } from "@material-tailwind/react";
 import {
-  RectangleGroupIcon,
-  FingerPrintIcon,
   SwatchIcon,
   HashtagIcon,
   EyeIcon,
   DocumentTextIcon,
+  CodeBracketSquareIcon,
+  DevicePhoneMobileIcon,
 } from "@heroicons/react/24/solid";
 import { SkillCard } from "@/common/components";
 import AnimateHoverScale from "@/common/motions/AnimateHoverScale";
 
 const SKILLS = [
   {
-    icon: RectangleGroupIcon,
-    title: "Frontend Web Development:",
+    icon: CodeBracketSquareIcon,
+    title: "Full Stack Web Development",
     children:
-      "Creating beautiful and functional web experiences is my forte. Using the latest technologies and best practices, I design and build websites that captivate and engage users.",
+      "Creating beautiful and functional web experiences is my forte. Using the latest technologies and best practices, I design and build web app. that captivate and engage users.",
   },
   {
-    icon: FingerPrintIcon,
+    icon: DevicePhoneMobileIcon,
     title: "Mobile App Development",
     children:
       " I have a strong hand in creating responsive and intuitive mobile apps that work seamlessly across iOS & Android devices. From concept to deployment, I handle every stage of the development process.",
@@ -29,7 +29,7 @@ const SKILLS = [
     icon: SwatchIcon,
     title: "Technology Stack",
     children:
-      "I'm well-versed in the industry's most popular full stack technologies, including HTML5, CSS3, JavaScript, C#, PHP and frameworks like React, Angular, Laravel and .Net",
+      "I'm well-versed in the industry's most popular full stack technologies, including HTML5, CSS3, JavaScript, C#, PHP and frameworks like React, Angular, Laravel, Flutter, React Native and .Net",
   },
   {
     icon: HashtagIcon,
@@ -79,7 +79,7 @@ export function Skills() {
       </div>
       <div className="container mx-auto grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {SKILLS.map((props, idx) => (
-          <AnimateHoverScale key={idx} index={idx} active={true}>
+          <AnimateHoverScale key={idx} index={idx + 1 * 3} active={true}>
             <SkillCard {...props} />
           </AnimateHoverScale>
         ))}

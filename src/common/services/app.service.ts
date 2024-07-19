@@ -2,21 +2,18 @@
 
 import { addDoc, orderBy, query, serverTimestamp } from "firebase/firestore";
 import { ContactFormDto, EMAIL_TYPE } from "../types";
-import {
-  replaceVariablesAsync,
-  sendEmail,
-} from "./email.service";
+import { replaceVariablesAsync, sendEmail } from "./email.service";
 import {
   collectionRef,
   getSnapShotQueryAsync,
 } from "@/configs/firebase.config";
 import EmailCore from "@/emails/EmailCore";
-import WelcomeEmail from "@/emails/WelcomeEmail";
+import ContactEmail from "@/emails/ContactEmail";
 
 export const sendGetInTouchEmail = async ({ email }: { email: string }) => {
   try {
     const emailCore = EmailCore();
-    const emailBody = WelcomeEmail();
+    const emailBody = ContactEmail();
     //
     const finalHTML = await replaceVariablesAsync(emailBody, {
       title: "",
@@ -40,10 +37,10 @@ export const sendGetInTouchEmail = async ({ email }: { email: string }) => {
       to: email,
     });
   } catch (error) {
-    console.log("🚀 ~ sendGetInTouchEmail ~ error:", error)
+    console.log("🚀 ~ sendGetInTouchEmail ~ error:", error);
     return {
       status: false,
-      error
+      error,
     };
   }
 };
@@ -60,7 +57,7 @@ export const proceedSaveContactAsync = async (data: ContactFormDto) => {
       timestamp: serverTimestamp(),
     });
     if (doc?.id) {
-      sendContactEmailAsync({ email: data.email });
+      sendContactEmailAsync({ name: data.name, email: data.email });
       return true;
     }
     return false;
@@ -70,20 +67,26 @@ export const proceedSaveContactAsync = async (data: ContactFormDto) => {
   //
 };
 
-export const sendContactEmailAsync = async ({ email }: { email: string }) => {
+export const sendContactEmailAsync = async ({
+  name,
+  email,
+}: {
+  name: string;
+  email: string;
+}) => {
   try {
     const emailCore = EmailCore();
-    const emailBody = WelcomeEmail();
+    const emailBody = ContactEmail();
     //
     const finalHTML = await replaceVariablesAsync(emailBody, {
       title: "",
-      subTitle: `Hi`,
+      subTitle: `Dear ${name}`,
       welcomeImage:
         "https://t4.ftcdn.net/jpg/04/03/62/35/360_F_403623508_OhrbkZ1zc2NzB9mN1d2ZcO1WrBDGKsxY.jpg",
     });
 
     const emailCoreHTML = await replaceVariablesAsync(emailCore, {
-      title: "Welcome",
+      title: "",
       body: finalHTML,
     });
 

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/next-script-for-ga */
 import "../globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 import { Layout } from "@/common/components";
 
@@ -29,6 +29,13 @@ export const metadata: Metadata = {
   description: "Here, you&apos;ll get a glimpse of my journey in the world of Software Development, where creativity meets functionality.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -37,11 +44,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
+        {/* <script
           defer
           data-site="YOUR_DOMAIN_HERE"
           src="https://api.nepcha.com/js/nepcha-analytics.js"
-        ></script>
+        ></script> */}
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
       <body className={roboto.className}>
