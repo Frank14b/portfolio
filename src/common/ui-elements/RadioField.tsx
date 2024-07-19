@@ -4,6 +4,7 @@ import { Checkbox, Radio } from "@material-tailwind/react";
 import useFormStore from "@/store/formStore";
 
 export interface RadioFieldProps {
+  formId: string;
   title: string;
   name?: string;
   type?: "radio";
@@ -21,7 +22,7 @@ export function RadioField({
 }) {
   const { reactHookUseForm } = useFormStore();
   const { register, formState, watch } =
-    (reactHookUseForm as UseFormReturn<any>) ?? {};
+    (reactHookUseForm?.[data.formId] as UseFormReturn<any>) ?? {};
   const { errors } = formState ?? {};
   const [error, setError] = useState<any>(null);
   const fieldKey = data?.name ?? data.title.toLowerCase();
@@ -40,7 +41,7 @@ export function RadioField({
     checkError();
   }, [watchField, checkError]);
 
-  if (!reactHookUseForm) return <></>;
+  if (!reactHookUseForm?.[data.formId]) return <></>;
   return (
     <>
       <div className="relative">

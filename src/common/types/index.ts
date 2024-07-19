@@ -39,3 +39,5 @@ export type ContactFormDto = {
   message: string;
   phone: string;
 };
+
+export * from "./auth.type";

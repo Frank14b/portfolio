@@ -11,9 +11,11 @@ import { UseFormHandleSubmit } from "react-hook-form";
 
 const useContacts = () => {
   //
+  const formId: string = "contactForm";
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { handleSubmit, reset } = useAppForm({
+    id: formId,
     schema: ContactFormSchema(),
     defaultValues: {
       name: "",
@@ -60,6 +62,7 @@ const useContacts = () => {
   );
 
   const data: ContactHookDto = {
+    formId,
     isLoading,
     setIsLoading,
     proceedGetInTouch,
@@ -73,6 +76,7 @@ const useContacts = () => {
 export default useContacts;
 
 export type ContactHookDto = {
+  formId: string;
   isLoading: boolean;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   proceedGetInTouch: ({ email }: { email: string }) => Promise<string | null>;

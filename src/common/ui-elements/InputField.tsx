@@ -10,6 +10,7 @@ import useFormStore from "@/store/formStore";
 import { UseFormReturn } from "react-hook-form";
 
 export interface InputFieldProps {
+  formId: string;
   title: string;
   name?: string;
   type?: HTMLInputTypeAttribute;
@@ -27,7 +28,7 @@ export function InputField({
   const [type, setType] = useState(data?.type ?? "text");
   const { reactHookUseForm } = useFormStore();
   const { register, formState, setValue, watch } =
-    (reactHookUseForm as UseFormReturn<any>) ?? {};
+    (reactHookUseForm?.[data.formId] as UseFormReturn<any>) ?? {};
   const { errors } = formState ?? {};
   const [error, setError] = useState<any>(null);
   const fieldKey = data?.name ?? data.title.toLowerCase();
@@ -60,7 +61,7 @@ export function InputField({
     });
   };
 
-  if (!reactHookUseForm) return <></>;
+  if (!reactHookUseForm?.[data.formId]) return <></>;
 
   return (
     <>
@@ -80,7 +81,9 @@ export function InputField({
               label={data.title}
               className={`block w-full bg-transparent py-1.5 pl-2 ${
                 data?.type == "password" ? "pr-8" : ""
-              } text-gray-900 placeholder:text-gray-400 ${data.isDark ? "text-gray-100": ""} ring-0 sm:text-sm sm:leading-6`}
+              } text-gray-900 placeholder:text-gray-400 ${
+                data.isDark ? "text-gray-100" : ""
+              } ring-0 sm:text-sm sm:leading-6`}
               placeholder={data?.placeholder ?? data.title}
               {...register(`${fieldKey}`, { onChange: handleOnChange })}
             />

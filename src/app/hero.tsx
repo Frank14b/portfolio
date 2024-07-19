@@ -84,7 +84,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
           </Typography>
         </div>
 
-        <AnimateInfiniteScale index={1} active={true}>
+        <AnimateInfiniteScale active={true}>
           <Image
             width={1024}
             height={1024}

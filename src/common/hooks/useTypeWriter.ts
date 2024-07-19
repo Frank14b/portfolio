@@ -1,34 +1,34 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const useTypeWriter = ({ text, speed }: { text: string; speed: number }) => {
-  let finalText = "";
   const [displayedText, setDisplayedText] = useState("");
   const index = useRef(0);
-  let initTimeout: NodeJS.Timeout | number | undefined;
+  const finalText = useRef<string>("");
+  const initTimeout = useRef<NodeJS.Timeout | number | undefined>(undefined);
 
   const tick = useCallback(() => {
-    finalText += text[index.current];
-    setDisplayedText(finalText);
+    finalText.current += text[index.current];
+    setDisplayedText(finalText.current);
     index.current++;
     if (index.current === text.length) {
       //
       setTimeout(() => {
         index.current = 0;
-        finalText = "";
-        tick();
+        finalText.current = "";
+        tick()
       }, 200 * text.length);
 
-      if (initTimeout) {
-        clearTimeout(initTimeout);
+      if (initTimeout.current) {
+        clearTimeout(initTimeout.current);
       }
       return;
     }
-    initTimeout = setTimeout(tick, speed);
-  }, [text, setDisplayedText]);
+    initTimeout.current = setTimeout(tick, speed);
+  }, [text, speed, setDisplayedText]);
 
   useEffect(() => {
     tick();
-  }, []);
+  }, [tick]);
 
   return { displayedText: displayedText + "_" };
 };

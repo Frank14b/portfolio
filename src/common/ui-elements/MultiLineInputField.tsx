@@ -5,6 +5,7 @@ import { UseFormReturn } from "react-hook-form";
 import TipTapTextEditor from "./TipTapTextEditor";
 
 export interface MultiLineInputFieldProps {
+  formId: string;
   title: string;
   name?: string;
   id?: string;
@@ -21,7 +22,7 @@ export function MultiLineInputField({
 }) {
   const { reactHookUseForm } = useFormStore();
   const { register, formState, setValue, watch } =
-    (reactHookUseForm as UseFormReturn<any>) ?? {};
+    (reactHookUseForm?.[data.formId] as UseFormReturn<any>) ?? {};
   const { errors } = formState ?? {};
   const [error, setError] = useState<any>(null);
   const fieldKey = data?.name ?? data.title.toLowerCase();
@@ -46,13 +47,16 @@ export function MultiLineInputField({
     });
   };
 
-  const editorCallBack = useCallback((content: string) => {
-    setValue(`${fieldKey}`, content, {
-      shouldValidate: true,
-    });
-  }, [fieldKey, setValue]);
+  const editorCallBack = useCallback(
+    (content: string) => {
+      setValue(`${fieldKey}`, content, {
+        shouldValidate: true,
+      });
+    },
+    [fieldKey, setValue]
+  );
 
-  if (!reactHookUseForm) return <></>;
+  if (!reactHookUseForm?.[data.formId]) return <></>;
 
   return (
     <>
@@ -71,7 +75,9 @@ export function MultiLineInputField({
                 label={data.title}
                 className={`block w-full bg-transparent py-1.5 pl-2 ${
                   data?.type == "password" ? "pr-8" : ""
-                } text-gray-900 placeholder:text-gray-400 ${data.isDark ? "text-gray-100": ""} ring-0 sm:text-sm sm:leading-6`}
+                } text-gray-900 placeholder:text-gray-400 ${
+                  data.isDark ? "text-gray-100" : ""
+                } ring-0 sm:text-sm sm:leading-6`}
                 // placeholder={data?.placeholder ?? data.title}
                 {...register(`${fieldKey}`, { onChange: handleOnChange })}
               ></Textarea>

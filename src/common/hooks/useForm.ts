@@ -6,11 +6,13 @@ import { useEffect } from "react";
 type FormValues = { [key: string]: any }; // Dynamic type for form values
 
 interface UseFormProps<T extends FormValues> {
+  id: string;
   schema: any; // Yup schema for validation
   defaultValues?: T | DefaultValues<T> | undefined; // Optional default values for the form
 }
 
 const useAppForm = <T extends FormValues>({
+  id,
   schema,
   defaultValues,
 }: UseFormProps<T>): UseFormReturn<T> => {
@@ -25,8 +27,8 @@ const useAppForm = <T extends FormValues>({
   });
 
   useEffect(() => {
-    setReactHookUseForm(hookForm);
-  }, [hookForm, setReactHookUseForm]);
+    setReactHookUseForm(id, hookForm);
+  }, [id, hookForm, setReactHookUseForm]);
 
   return hookForm;
 };

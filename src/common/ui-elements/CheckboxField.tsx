@@ -4,6 +4,7 @@ import { Checkbox } from "@material-tailwind/react";
 import useFormStore from "@/store/formStore";
 
 export interface CheckboxFieldProps {
+  formId: string;
   title: string;
   name?: string;
   type?: "checkbox" | "radio";
@@ -20,7 +21,7 @@ export function CheckboxField({
 }) {
   const { reactHookUseForm } = useFormStore();
   const { register, formState, watch } =
-    (reactHookUseForm as UseFormReturn<any>) ?? {};
+    (reactHookUseForm?.[data.formId] as UseFormReturn<any>) ?? {};
   const { errors } = formState ?? {};
   const [error, setError] = useState<any>(null);
   const fieldKey = data?.name ?? data.title.toLowerCase();
@@ -39,7 +40,7 @@ export function CheckboxField({
     checkError();
   }, [watchField, checkError]);
 
-  if (!reactHookUseForm) return <></>;
+  if (!reactHookUseForm?.[data.formId]) return <></>;
   return (
     <>
       <div className="relative">

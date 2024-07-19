@@ -11,6 +11,7 @@ import { CustomNextImage } from ".";
 import { ObjectKeyDto } from "../types";
 
 export interface SelectFieldProps {
+  formId: string;
   title: string;
   name?: string;
   type?: HTMLInputTypeAttribute;
@@ -33,7 +34,7 @@ export default function SelectField({
 }) {
   const { reactHookUseForm } = useFormStore();
   const { register, formState, setValue, watch } =
-    (reactHookUseForm as UseFormReturn<any>) ?? {};
+    (reactHookUseForm?.[data.formId] as UseFormReturn<any>) ?? {};
   const { errors } = formState ?? {};
   const [error, setError] = useState<any>(null);
   const fieldKey = data?.name ?? data.title.toLowerCase();
@@ -64,7 +65,7 @@ export default function SelectField({
     });
   };
 
-  if (!reactHookUseForm) return <></>;
+  if (!reactHookUseForm?.[data.formId]) return <></>;
 
   return (
     <>
