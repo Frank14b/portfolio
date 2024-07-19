@@ -14,13 +14,18 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
   const [email, setEmail] = useState<string>("");
 
   const heroTitle = useTypeWriter({
-    text: "Hello Guy's",
+    allText: ["Hello Guy's"],
     speed: 200,
   });
-  
+
   const heroSecondTitle = useTypeWriter({
-    text: "Welcome to my Page!",
+    allText: [
+      "Welcome to my Page!",
+      "I am here to help you",
+      "Let's build the IT world together",
+    ],
     speed: 150,
+    infinite: true
   });
 
   const handleSendEmail = useCallback(async () => {
@@ -35,7 +40,7 @@ function Hero({ contactHook }: { contactHook: ContactHookDto }) {
           <Typography
             variant="h1"
             color="blue-gray"
-            className="mb-4 lg:text-5xl !leading-tight text-3xl text-white"
+            className="mb-4 lg:text-5xl !leading-tight text-3xl text-white capitalize"
           >
             {heroTitle.displayedText} <br /> {heroSecondTitle.displayedText}
           </Typography>

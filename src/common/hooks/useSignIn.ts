@@ -24,11 +24,14 @@ const useSignIn = () => {
     async (data: SignInFormDto) => {
       setIsLoading(true);
       const result = await proceedSignInAsync(data);
-      if (result) {
+
+      if (result.status) {
         notification.notifySuccess("Authentication completed");
         reset();
+      }else{
+        notification.notifyError(result.error);
       }
-
+      
       setIsLoading(false);
     },
     [reset]

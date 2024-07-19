@@ -81,16 +81,16 @@ function MenuNav() {
 function ActionButtons({ handleOpenSignIn }: { handleOpenSignIn: () => void }) {
   return (
     <>
-      <Button
+      {/* <Button
         variant="text"
         className="dark:text-gray-200"
         onClick={handleOpenSignIn}
       >
         Sign In
-      </Button>
+      </Button> */}
       <a href="#">
-        <Button color="gray" className="bg-primaryBlue">
-          Sign Up
+        <Button color="gray" onClick={handleOpenSignIn} className="bg-primaryBlue">
+          Sign In
         </Button>
       </a>
     </>
@@ -125,7 +125,7 @@ export function Navbar() {
           >
             <CommandLineIconOutline className="h-5 w-5 mt-1" /> FF.
           </Typography>
-          <ul className="ml-[8rem] hidden items-center gap-8 lg:flex">
+          <ul className="ml-[2rem] hidden items-center gap-8 lg:flex">
             <MenuNav />
           </ul>
           <div className="hidden items-center gap-2 lg:flex">

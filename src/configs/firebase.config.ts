@@ -32,11 +32,14 @@ const collectionRef = {
 
 const getSnapShotQueryAsync = <T>(
   q: Query<DocumentData, DocumentData>
-): Promise<T | undefined> => {
+): Promise<T | undefined | null> => {
   return new Promise((resolve, reject) => {
     onSnapshot(
       q,
       (querySnapshot: QuerySnapshot<DocumentData, DocumentData>) => {
+        //
+        if (querySnapshot.empty) return resolve(null);
+        //
         const result = querySnapshot.docs.map((doc) => {
           const data = doc.data();
           return data;

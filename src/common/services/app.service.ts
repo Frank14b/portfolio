@@ -45,11 +45,6 @@ export const sendGetInTouchEmail = async ({ email }: { email: string }) => {
   }
 };
 
-export const getUsersAsync = async () => {
-  const q = query(collectionRef.users, orderBy("email", "desc"));
-  return await getSnapShotQueryAsync<any>(q);
-};
-
 export const proceedSaveContactAsync = async (data: ContactFormDto) => {
   try {
     const doc = await addDoc(collectionRef.contacts, {
