@@ -9,7 +9,7 @@ export const CONTACT_INTEREST = [
   },
   {
     key: "it-support",
-    value: "It Support",
+    value: "IT Support",
   },
   {
     key: "others",
